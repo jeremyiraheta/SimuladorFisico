@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Parabolic));
             this.c_PBBall = new System.Windows.Forms.PictureBox();
             this.c_PBArrow = new System.Windows.Forms.PictureBox();
@@ -50,6 +51,11 @@
             this.label8 = new System.Windows.Forms.Label();
             this.c_LT = new System.Windows.Forms.Label();
             this.c_Track = new System.Windows.Forms.TrackBar();
+            this.tt = new System.Windows.Forms.ToolTip(this.components);
+            this.c_LVx = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.c_LVy = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.c_PBBall)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.c_PBArrow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.c_Track)).BeginInit();
@@ -70,9 +76,9 @@
             // 
             this.c_PBArrow.BackColor = System.Drawing.Color.Transparent;
             this.c_PBArrow.Image = global::SimuladorFisico.Properties.Resources.arrow;
-            this.c_PBArrow.Location = new System.Drawing.Point(0, 493);
+            this.c_PBArrow.Location = new System.Drawing.Point(0, 497);
             this.c_PBArrow.Name = "c_PBArrow";
-            this.c_PBArrow.Size = new System.Drawing.Size(102, 77);
+            this.c_PBArrow.Size = new System.Drawing.Size(85, 73);
             this.c_PBArrow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.c_PBArrow.TabIndex = 1;
             this.c_PBArrow.TabStop = false;
@@ -96,6 +102,7 @@
             this.c_TBVel.Name = "c_TBVel";
             this.c_TBVel.Size = new System.Drawing.Size(106, 20);
             this.c_TBVel.TabIndex = 3;
+            this.tt.SetToolTip(this.c_TBVel, "Seleccione la velocidad inicial 0-100");
             this.c_TBVel.TextChanged += new System.EventHandler(this.c_CBVel_TextChanged);
             // 
             // label2
@@ -115,6 +122,7 @@
             this.c_TBAngle.Size = new System.Drawing.Size(100, 20);
             this.c_TBAngle.TabIndex = 5;
             this.c_TBAngle.Text = "45";
+            this.tt.SetToolTip(this.c_TBAngle, "Seleccione el angulo inicial 0-95 grados");
             this.c_TBAngle.TextChanged += new System.EventHandler(this.c_TBAngle_TextChanged);
             // 
             // label3
@@ -135,6 +143,7 @@
             this.c_CBGrav.Name = "c_CBGrav";
             this.c_CBGrav.Size = new System.Drawing.Size(121, 21);
             this.c_CBGrav.TabIndex = 7;
+            this.tt.SetToolTip(this.c_CBGrav, "Seleccione un entorno diferente");
             // 
             // label4
             // 
@@ -142,9 +151,9 @@
             this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Location = new System.Drawing.Point(865, 588);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(74, 13);
+            this.label4.Size = new System.Drawing.Size(59, 13);
             this.label4.TabIndex = 8;
-            this.label4.Text = "Y Maximo(M): ";
+            this.label4.Text = "Y Maximo: ";
             // 
             // label5
             // 
@@ -152,9 +161,9 @@
             this.label5.BackColor = System.Drawing.Color.Transparent;
             this.label5.Location = new System.Drawing.Point(865, 607);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(74, 13);
+            this.label5.Size = new System.Drawing.Size(59, 13);
             this.label5.TabIndex = 9;
-            this.label5.Text = "X Maximo(M): ";
+            this.label5.Text = "X Maximo: ";
             // 
             // c_LY
             // 
@@ -166,6 +175,7 @@
             this.c_LY.Size = new System.Drawing.Size(13, 13);
             this.c_LY.TabIndex = 10;
             this.c_LY.Text = "0";
+            this.tt.SetToolTip(this.c_LY, "Altura maxima");
             // 
             // c_LX
             // 
@@ -177,6 +187,7 @@
             this.c_LX.Size = new System.Drawing.Size(13, 13);
             this.c_LX.TabIndex = 11;
             this.c_LX.Text = "0";
+            this.tt.SetToolTip(this.c_LX, "Distancia maxima recorrida");
             // 
             // c_Lstart
             // 
@@ -188,45 +199,47 @@
             this.c_Lstart.Size = new System.Drawing.Size(38, 46);
             this.c_Lstart.TabIndex = 12;
             this.c_Lstart.Text = "►";
+            this.tt.SetToolTip(this.c_Lstart, "Inicia la animacion");
             this.c_Lstart.Click += new System.EventHandler(this.c_Lstart_Click);
             // 
             // label6
             // 
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.Transparent;
-            this.label6.Location = new System.Drawing.Point(973, 607);
+            this.label6.Location = new System.Drawing.Point(987, 607);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(35, 13);
+            this.label6.Size = new System.Drawing.Size(20, 13);
             this.label6.TabIndex = 14;
-            this.label6.Text = "X(M): ";
+            this.label6.Text = "X: ";
             // 
             // label7
             // 
             this.label7.AutoSize = true;
             this.label7.BackColor = System.Drawing.Color.Transparent;
-            this.label7.Location = new System.Drawing.Point(973, 588);
+            this.label7.Location = new System.Drawing.Point(987, 588);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(35, 13);
+            this.label7.Size = new System.Drawing.Size(20, 13);
             this.label7.TabIndex = 13;
-            this.label7.Text = "Y(M): ";
+            this.label7.Text = "Y: ";
             // 
             // c_LAy
             // 
             this.c_LAy.AutoSize = true;
             this.c_LAy.BackColor = System.Drawing.Color.Transparent;
             this.c_LAy.ForeColor = System.Drawing.Color.Lime;
-            this.c_LAy.Location = new System.Drawing.Point(999, 588);
+            this.c_LAy.Location = new System.Drawing.Point(1013, 588);
             this.c_LAy.Name = "c_LAy";
             this.c_LAy.Size = new System.Drawing.Size(13, 13);
             this.c_LAy.TabIndex = 15;
             this.c_LAy.Text = "0";
+            this.tt.SetToolTip(this.c_LAy, "Mueva para cambiar el angulo");
             // 
             // c_LAx
             // 
             this.c_LAx.AutoSize = true;
             this.c_LAx.BackColor = System.Drawing.Color.Transparent;
             this.c_LAx.ForeColor = System.Drawing.Color.Red;
-            this.c_LAx.Location = new System.Drawing.Point(999, 609);
+            this.c_LAx.Location = new System.Drawing.Point(1013, 609);
             this.c_LAx.Name = "c_LAx";
             this.c_LAx.Size = new System.Drawing.Size(13, 13);
             this.c_LAx.TabIndex = 16;
@@ -242,13 +255,14 @@
             this.c_LStop.Size = new System.Drawing.Size(39, 46);
             this.c_LStop.TabIndex = 17;
             this.c_LStop.Text = "◙";
+            this.tt.SetToolTip(this.c_LStop, "Restablece la animacion");
             this.c_LStop.Click += new System.EventHandler(this.c_LStop_Click);
             // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.BackColor = System.Drawing.Color.Transparent;
-            this.label8.Location = new System.Drawing.Point(1044, 588);
+            this.label8.Location = new System.Drawing.Point(948, 624);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(59, 13);
             this.label8.TabIndex = 18;
@@ -259,11 +273,12 @@
             this.c_LT.AutoSize = true;
             this.c_LT.BackColor = System.Drawing.Color.Transparent;
             this.c_LT.ForeColor = System.Drawing.Color.Blue;
-            this.c_LT.Location = new System.Drawing.Point(1102, 588);
+            this.c_LT.Location = new System.Drawing.Point(1013, 624);
             this.c_LT.Name = "c_LT";
             this.c_LT.Size = new System.Drawing.Size(13, 13);
             this.c_LT.TabIndex = 19;
             this.c_LT.Text = "0";
+            this.tt.SetToolTip(this.c_LT, "Segundos que el objeto permance en movimiento");
             // 
             // c_Track
             // 
@@ -278,6 +293,50 @@
             this.c_Track.Value = 1;
             this.c_Track.Scroll += new System.EventHandler(this.c_Track_Scroll);
             // 
+            // c_LVx
+            // 
+            this.c_LVx.AutoSize = true;
+            this.c_LVx.BackColor = System.Drawing.Color.Transparent;
+            this.c_LVx.ForeColor = System.Drawing.Color.White;
+            this.c_LVx.Location = new System.Drawing.Point(1110, 588);
+            this.c_LVx.Name = "c_LVx";
+            this.c_LVx.Size = new System.Drawing.Size(13, 13);
+            this.c_LVx.TabIndex = 22;
+            this.c_LVx.Text = "0";
+            this.tt.SetToolTip(this.c_LVx, "Segundos que el objeto permance en movimiento");
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.BackColor = System.Drawing.Color.Transparent;
+            this.label10.Location = new System.Drawing.Point(1091, 588);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(25, 13);
+            this.label10.TabIndex = 21;
+            this.label10.Text = "Vx: ";
+            // 
+            // c_LVy
+            // 
+            this.c_LVy.AutoSize = true;
+            this.c_LVy.BackColor = System.Drawing.Color.Transparent;
+            this.c_LVy.ForeColor = System.Drawing.Color.White;
+            this.c_LVy.Location = new System.Drawing.Point(1110, 607);
+            this.c_LVy.Name = "c_LVy";
+            this.c_LVy.Size = new System.Drawing.Size(13, 13);
+            this.c_LVy.TabIndex = 24;
+            this.c_LVy.Text = "0";
+            this.tt.SetToolTip(this.c_LVy, "Segundos que el objeto permance en movimiento");
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.BackColor = System.Drawing.Color.Transparent;
+            this.label12.Location = new System.Drawing.Point(1091, 607);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(25, 13);
+            this.label12.TabIndex = 23;
+            this.label12.Text = "Vy: ";
+            // 
             // Parabolic
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -285,6 +344,10 @@
             this.BackgroundImage = global::SimuladorFisico.Properties.Resources.back;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1174, 644);
+            this.Controls.Add(this.c_LVy);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.c_LVx);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.c_Track);
             this.Controls.Add(this.c_LT);
             this.Controls.Add(this.label8);
@@ -347,6 +410,11 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label c_LT;
         private System.Windows.Forms.TrackBar c_Track;
+        private System.Windows.Forms.ToolTip tt;
+        private System.Windows.Forms.Label c_LVx;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label c_LVy;
+        private System.Windows.Forms.Label label12;
     }
 
 }

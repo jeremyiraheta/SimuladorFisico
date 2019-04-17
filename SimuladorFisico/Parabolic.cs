@@ -88,9 +88,11 @@ namespace SimuladorFisico
             {
                 cp = new MovPara(double.Parse(c_TBVel.Text), double.Parse(c_TBAngle.Text), (double)c_CBGrav.SelectedValue);
                 nt.Start();
-                c_LY.Text = String.Format("{0:0.00}", cp.Ymax);
-                c_LX.Text = String.Format("{0:0.00}", cp.Xmax);
-                c_LT.Text = String.Format("{0:0.00}", cp.Secmax);
+                c_LY.Text = String.Format("{0:0.00} mts", cp.Ymax);
+                c_LX.Text = String.Format("{0:0.00} mts", cp.Xmax);
+                c_LT.Text = String.Format("{0:0.00} seg", cp.Secmax);
+                c_LVx.Text = String.Format("{0:0.00} m/s", cp.Vx());
+                c_PBArrow.Visible = false;
             }
             
         }
@@ -106,13 +108,14 @@ namespace SimuladorFisico
             if (secs > cp.Secmax)
             {
                 ((Timer)sender).Stop();
-                c_LAx.Text = string.Format("{0:0.00}", cp.Xmax);
-                c_LAy.Text = string.Format("{0:0.00}", 0);
+                c_LAx.Text = string.Format("{0:0.00} mts", cp.Xmax);
+                c_LAy.Text = string.Format("{0:0.00} mts", 0);
             }                
             else
             {                
-                c_LAx.Text = string.Format("{0:0.00}", cp.getX(secs));
-                c_LAy.Text = string.Format("{0:0.00}", cp.getY(secs));
+                c_LAx.Text = string.Format("{0:0.00} mts", cp.getX(secs));
+                c_LAy.Text = string.Format("{0:0.00} mts", cp.getY(secs));
+                c_LVy.Text = String.Format("{0:0.00} m/s", cp.Vy(secs));
                 c_PBBall.Location = new Point((int)x, (int)y-10);                                
             }
         }
@@ -163,23 +166,26 @@ namespace SimuladorFisico
         /// <param name="e"></param>
         private void c_TBAngle_TextChanged(object sender, EventArgs e)
         {
-            //double t = 0;
-            //try
-            //{
-            //    t = double.Parse(c_TBAngle.Text);
-            //}
-            //catch
-            //{
+            double t = 0;
+            try
+            {
+                t = double.Parse(c_TBAngle.Text);
+            }
+            catch
+            {
 
-            //    t = -1;
-            //}
-            //if(c_TBAngle.Text != "")
-            //{
-            //    if (t <= 0)
-            //        c_TBAngle.Text = "1";
-            //    else if (t > 90)
-            //        c_TBAngle.Text = "90";
-            //}
+                t = -1;
+            }
+            if (c_TBAngle.Text != "" && t == -1)
+            {
+                c_TBAngle.Text = "45";
+                c_PBArrow.Image = OriginalBitmap;
+            }
+            else if(c_TBAngle.Text == "")
+            {
+                c_TBAngle.Text = "45";
+                c_PBArrow.Image = OriginalBitmap;
+            }
         }
         /// <summary>
         /// Dibuja la trayectoria del objeto
@@ -241,6 +247,7 @@ namespace SimuladorFisico
             secs = 0;
             escala = SCALE;
             c_PBBall.Location = new Point(0,(int)CCY(0));
+            c_PBArrow.Visible = true;
             this.Invalidate();
             cp = null;
             if(nt != null)
@@ -273,86 +280,46 @@ namespace SimuladorFisico
             c_CBGrav.ValueMember = "value";
 
             c_CBGrav.SelectedIndex = 0;
-
-            // Start with no rotation.
             CurrentAngle = 0;
             TotalAngle = 0;
-
-            // Load the bitmap.
             Bitmap bm = new Bitmap(c_PBArrow.Image);
             c_PBArrow.Image = OriginalBitmap;
             c_PBArrow.Visible = true;
-
-            // See how big the rotated bitmap must be.
             int wid = (int)Math.Sqrt(bm.Width * bm.Width + bm.Height * bm.Height);
-
-            // Make the original unrotated bitmap.
             OriginalBitmap = new Bitmap(wid, wid);
-
-            // Save the center of the image for calculating rotation angles.
             ImageCenter = new PointF(0, wid);
-
-            // Copy the image into the middle of the bitmap.
             using (Graphics gr = Graphics.FromImage(OriginalBitmap))
             {
-                // Clear with the color in the image's upper left corner.
                 gr.Clear(bm.GetPixel(0, 0));
-
-                //// For debugging. (Easier to see the background.)
-                //gr.Clear(Color.LightBlue);
-
-                // Draw the image centered.
                 gr.DrawImage(bm, (wid - bm.Width) / 2, (wid - bm.Height) / 2);
             }
-
-            // Display the original image.
             c_PBArrow.Image = OriginalBitmap;
 
         }
-        // Return a bitmap rotated around its center.
+        
         private Bitmap RotateBitmap(Bitmap bm, float angle)
         {
-            // Make a bitmap to hold the rotated result.
             Bitmap result = new Bitmap(bm.Width, bm.Height);
-
-            // Create the real rotation transformation.
             Matrix rotate_at_center = new Matrix();
-            rotate_at_center.RotateAt(angle,
-                new PointF(bm.Width / 2f, bm.Height / 2f));
-
-            // Draw the image onto the new bitmap rotated.
+            rotate_at_center.RotateAt(angle,           
+                new PointF(0, bm.Height));
             using (Graphics gr = Graphics.FromImage(result))
             {
-                // Use smooth image interpolation.
                 gr.InterpolationMode = InterpolationMode.High;
-
-                // Clear with the color in the image's upper left corner.
                 gr.Clear(OriginalBitmap.GetPixel(0, 0));
-
-                //// For debugging. (Makes it easier to see the background.)
-                //gr.Clear(Color.LightBlue);
-
-                // Set up the transformation to rotate.
                 gr.Transform = rotate_at_center;
-
-                // Draw the image centered on the bitmap.
                 gr.DrawImage(bm, 0, 0);
             }
 
-            // Return the result bitmap.
             return result;
         }
-        // Let the user click and drag to rotate.
+
         private float StartAngle;
         private bool DragInProgress = false;
         private void c_PBArrow_MouseDown(object sender, MouseEventArgs e)
         {
-            // Do nothing if there's no image loaded.
             if (OriginalBitmap == null) return;
             DragInProgress = true;
-
-            // Get the initial angle from horizontal to the
-            // vector between the center and the drag start point.
             float dx = e.X - ImageCenter.X;
             float dy = e.Y - ImageCenter.Y;
             StartAngle = (float)Math.Atan2(dy, dx);
@@ -360,34 +327,40 @@ namespace SimuladorFisico
 
         private void c_PBArrow_MouseMove(object sender, MouseEventArgs e)
         {
-            // Do nothing if there's no drag in progress.
             if (!DragInProgress) return;
-
-            // Get the angle from horizontal to the
-            // vector between the center and the current point.
-            float dx = e.X - ImageCenter.X;
-            float dy = e.Y - ImageCenter.Y;
+            float dx = e.X*5 - ImageCenter.X;
+            float dy = e.Y*5 - ImageCenter.Y;
             float new_angle = (float)Math.Atan2(dy, dx);
-
-            // Calculate the change in angle.
             CurrentAngle = new_angle - StartAngle;
-
-            // Convert to degrees.
-            CurrentAngle *= 180 / (float)Math.PI;
-
-            // Add to the previous total angle rotated.
+            CurrentAngle = radToAng(CurrentAngle);
             CurrentAngle += TotalAngle;
 
-            if (CurrentAngle > 180)
+            if (CurrentAngle > 90)
                 CurrentAngle = 0;
-            c_TBAngle.Text = CurrentAngle.ToString();
+            c_TBAngle.Text = (Math.Round(45 - CurrentAngle,2)).ToString();
 
-            // Rotate the original image to make the result bitmap.
-            RotatedBitmap = RotateBitmap(OriginalBitmap, CurrentAngle);
+            float ang = 0;
+            try
+            {
+                ang = float.Parse(c_TBAngle.Text);
+            }
+            catch
+            {
+            }
+            if (ang >= 0 && ang <= 90)
+                RotatedBitmap = RotateBitmap(OriginalBitmap, CurrentAngle);
+            else if (ang < 0)
+                c_TBAngle.Text = "0";
+            else
+                c_TBAngle.Text = "90";
 
-            // Display the result.
             c_PBArrow.Image = RotatedBitmap;
             c_PBArrow.Refresh();
+        }
+
+        private float radToAng(float rad)
+        {
+            return rad * 180 / (float)Math.PI;
         }
 
         private void c_PBArrow_MouseUp(object sender, MouseEventArgs e)
