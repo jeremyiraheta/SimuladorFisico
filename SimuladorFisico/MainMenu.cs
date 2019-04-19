@@ -30,5 +30,12 @@ namespace SimuladorFisico
                 
 
         }
+
+        private void c_BTCentrif_Click(object sender, EventArgs e)
+        {
+            Centrifuga p = new Centrifuga();
+            p.Show(this);
+            this.Hide();
+        }
     }
 }

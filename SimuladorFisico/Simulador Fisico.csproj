@@ -61,6 +61,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Centrifuga.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Centrifuga.Designer.cs">
+      <DependentUpon>Centrifuga.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FCentri.cs" />
     <Compile Include="Parabolic.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -76,6 +83,9 @@
     <Compile Include="MovPara.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Centrifuga.resx">
+      <DependentUpon>Centrifuga.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </EmbeddedResource>

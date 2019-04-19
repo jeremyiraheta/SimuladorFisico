@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.c_BTParab = new System.Windows.Forms.Button();
+            this.c_BTCentrif = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // c_BTParab
@@ -41,18 +42,29 @@
             this.c_BTParab.UseVisualStyleBackColor = true;
             this.c_BTParab.Click += new System.EventHandler(this.c_BTParab_Click);
             // 
+            // c_BTCentrif
+            // 
+            this.c_BTCentrif.Location = new System.Drawing.Point(196, 46);
+            this.c_BTCentrif.Name = "c_BTCentrif";
+            this.c_BTCentrif.Size = new System.Drawing.Size(137, 23);
+            this.c_BTCentrif.TabIndex = 1;
+            this.c_BTCentrif.Text = "Fuerza Centrifuga";
+            this.c_BTCentrif.UseVisualStyleBackColor = true;
+            this.c_BTCentrif.Click += new System.EventHandler(this.c_BTCentrif_Click);
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(509, 135);
+            this.Controls.Add(this.c_BTCentrif);
             this.Controls.Add(this.c_BTParab);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MainMenu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Menu";
+            this.Text = "Simulador Fisico";
             this.Load += new System.EventHandler(this.Menu_Load);
             this.ResumeLayout(false);
 
@@ -61,5 +73,6 @@
         #endregion
 
         private System.Windows.Forms.Button c_BTParab;
+        private System.Windows.Forms.Button c_BTCentrif;
     }
 }
