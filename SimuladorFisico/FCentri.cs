@@ -3,30 +3,38 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace SimuladorFisico
 {
     class FCentri
     {
-        double r, m, v, p;
-        public FCentri(double masa, double radio, double periodo = 0, double velocidad = 0)
+        double r, m, v, p, a;
+        public FCentri(double masa, double radio, double periodo = 0, double velocidad = 0, double aceleracion = 0)
         {
             m = masa;
             r = radio;
             p = periodo;
             v = velocidad;
-            if (p == 0 && v == 0)
-                throw new Exception("Debe definirse uno de los 2 parametros opcionales");
+            a = aceleracion;
+            if (v == 0 && a != 0)//obtiene la velocidad de la aceleracion
+                v = Math.Sqrt(a * r);
+            if (p == 0 && v == 0 && a == 0)
+                throw new Exception("Debe definirse uno de los 3 parametros opcionales");
         }
-
+        /// <summary>
+        /// Aceleracion si no hay definida velocidad usa la formula A = (4*PI^2*R)/(T^2) si no usa A = (V^2)/R
+        /// </summary>
         public double Aceleracion
         {
             get
             {
                 if (v == 0)
                     return (4 * Math.Pow(Math.PI, 2) * r) / Math.Pow(p, 2);
+                else if (a == 0)
+                    return Math.Pow(v, 2) / r;
                 else
-                    return Math.Pow(v, 2) / r;                
+                    return a;
             }
         }
         /// <summary>
@@ -88,9 +96,9 @@ namespace SimuladorFisico
         /// <param name="segundos"></param>
         /// <param name="posicioninicial"></param>
         /// <returns></returns>
-        public System.Drawing.Point Posicion(double segundos, System.Drawing.Point posicioninicial)
+        public PointF Posicion(double segundos)
         {
-            return new System.Drawing.Point((int)(posicioninicial.X + r * Math.Cos(VelocidadAngular * segundos)), (int)(posicioninicial.Y + r * Math.Sin(VelocidadAngular * segundos)));
+            return new PointF((float)(r * Math.Cos(VelocidadAngular * segundos)), (float)(r * Math.Sin(VelocidadAngular * segundos)));
         }
 
         /// <summary>
@@ -98,25 +106,42 @@ namespace SimuladorFisico
         /// </summary>
         /// <param name="grados"></param>
         /// <returns></returns>
-        public int X(double grados, int xi = 0)
+        public float X(double grados, float xi = 0)
         {
-            return xi + (int)(r * Math.Cos(GradToRad(grados)));
+            return xi + (float)(r * Math.Cos(GradToRad(grados)));
         }
         /// <summary>
         /// Posicion en Y con respecto al plano cartesiano
         /// </summary>
         /// <param name="grados"></param>
         /// <returns></returns>
-        public int Y(double grados, int yi = 0)
+        public float Y(double grados, float yi = 0)
         {
-            return yi + (int)(r * Math.Sin(GradToRad(grados)));
+            return yi + (float)(r * Math.Sin(GradToRad(grados)));
+        }
+        /// <summary>
+        /// Determina el angulo a los n segundos
+        /// </summary>
+        /// <param name="nsegundos"></param>
+        /// <param name="anguloinicial"></param>
+        /// <returns></returns>
+        public double AnguloEnNSegundos(double nsegundos, double anguloinicial)
+        {
+            return anguloinicial + VelocidadAngular * nsegundos;
+        }
+        public double Radio
+        {
+            get
+            {
+                return r;
+            }
         }
         /// <summary>
         /// Convierte grados a radianes
         /// </summary>
         /// <param name="grados"></param>
         /// <returns></returns>
-        public double GradToRad(double grados)
+        public static double GradToRad(double grados)
         {
             return grados * (Math.PI / 180);
         }
