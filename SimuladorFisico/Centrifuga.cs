@@ -16,6 +16,7 @@ namespace SimuladorFisico
         private const int CENTERS = 10;
         private Brush BALLCOLOR = Brushes.Blue;
         private const string NONUM = "Debe contener un numero valido";
+        private const string MAXED = "Sobrepasa el valor maximo posible: {0}";
 
         FCentri c;
         PointF cp;
@@ -68,6 +69,19 @@ namespace SimuladorFisico
             float height = 2 * radius;
             g.FillEllipse(Brushes.DarkBlue, x, y, width, height);            
         }
+        private void drawVectors(Graphics g, PointF center, PointF origen)
+        {
+            PointF[] f = new PointF[8];
+            f[0] = new PointF(center.X, center.Y);
+            f[1] = new PointF(center.X, center.Y);
+            f[2] = new PointF(center.X, center.Y);
+            f[3] = new PointF(center.X, center.Y);
+            f[4] = new PointF(center.X, center.Y);
+            f[5] = new PointF(center.X, center.Y);
+            f[6] = new PointF(center.X, center.Y);
+            f[7] = new PointF(center.X, center.Y);            
+            g.FillPolygon(Brushes.Red,f);
+        }
 
         private void c_Lstart_Click(object sender, EventArgs e)
         {
@@ -84,15 +98,20 @@ namespace SimuladorFisico
                 cp = new Point(0, 0);
                 secs = 0;
                 t.Start();
+                fillTable();
             }
             else
             {
+                c_LStop_Click(null,null);
+                c_tab.Rows.Clear();             
                 if ((double)vals[1] == 0)
                     error.SetError(c_TBMasa, NONUM);
                 if ((double)vals[2] == 0)
                     error.SetError(c_TBRadio, NONUM);
                 if ((double)vals[3] == 0)
                     error.SetError(c_TBParam, NONUM);
+                if ((double)vals[2] > 300)
+                    error.SetError(c_TBRadio, String.Format(MAXED, 300));
                     
             }
         }
@@ -101,17 +120,18 @@ namespace SimuladorFisico
             double m = 0, r=0, p=0;
             object[] ret = new object[4];
             ret[0] = true;
-            if (double.TryParse(c_TBMasa.Text, out m) || m > 0)
-                ret[1] = m;
-            else
+            ret[1] = m;
+            ret[2] = r;
+            ret[3] = p;
+            if (double.TryParse(c_TBMasa.Text, out m))
+                ret[1] = m > 0 ? m : 0;
+            if (double.TryParse(c_TBRadio.Text, out r))
+                ret[2] = r > 0 ? r : 0;
+            if (double.TryParse(c_TBParam.Text, out p))
+                ret[3] = p > 0 ? p : 0;
+            if ((double)ret[1] == 0 || (double)ret[2] == 0 || (double)ret[3] == 0)
                 ret[0] = false;
-            if (double.TryParse(c_TBRadio.Text, out r) || r > 0)
-                ret[2] = r;
-            else
-                ret[0] = false;
-            if (double.TryParse(c_TBParam.Text, out p) || p > 0)
-                ret[3] = p;
-            else
+            if (r > 300)
                 ret[0] = false;
             return ret;
         }
@@ -119,6 +139,16 @@ namespace SimuladorFisico
         private void c_LStop_Click(object sender, EventArgs e)
         {
             t.Stop();                        
+        }
+        private void fillTable()
+        {
+            c_tab.Rows.Clear();
+            c_tab.Rows.Add("Periodo", c.Periodo, "seg");
+            c_tab.Rows.Add("Frecuencia", c.Frecuencia, "hz");
+            c_tab.Rows.Add("Velocidad Angular", c.VelocidadAngular, "rad/seg");
+            c_tab.Rows.Add("Velocidad Tangencial", c.VelocidadTangencial, "m/seg");
+            c_tab.Rows.Add("Aceleracion Angular", c.Aceleracion, "m/s²");
+            c_tab.Rows.Add("Fuerza Centrifuga", c.FuerzaCentrifuga, "newton");            
         }
     }
 }
