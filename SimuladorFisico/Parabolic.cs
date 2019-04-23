@@ -103,20 +103,27 @@ namespace SimuladorFisico
         /// <param name="e"></param>
         private void Nt_Tick(object sender, EventArgs e)
         {
-            secs += 0.1;
-            double x = Rescale(cp.getX(secs)), y = CCY(Rescale(cp.getY(secs)));            
-            if (secs > cp.Secmax)
+            try
             {
-                ((Timer)sender).Stop();
-                c_LAx.Text = string.Format("{0:0.00} mts", cp.Xmax);
-                c_LAy.Text = string.Format("{0:0.00} mts", 0);
-            }                
-            else
-            {                
-                c_LAx.Text = string.Format("{0:0.00} mts", cp.getX(secs));
-                c_LAy.Text = string.Format("{0:0.00} mts", cp.getY(secs));
-                c_LVy.Text = String.Format("{0:0.00} m/s", cp.Vy(secs));
-                c_PBBall.Location = new Point((int)x, (int)y-10);                                
+                secs += 0.1;
+                double x = Rescale(cp.getX(secs)), y = CCY(Rescale(cp.getY(secs)));
+                if (secs > cp.Secmax)
+                {
+                    ((Timer)sender).Stop();
+                    c_LAx.Text = string.Format("{0:0.00} mts", cp.Xmax);
+                    c_LAy.Text = string.Format("{0:0.00} mts", 0);
+                }
+                else
+                {
+                    c_LAx.Text = string.Format("{0:0.00} mts", cp.getX(secs));
+                    c_LAy.Text = string.Format("{0:0.00} mts", cp.getY(secs));
+                    c_LVy.Text = String.Format("{0:0.00} m/s", cp.Vy(secs));
+                    c_PBBall.Location = new Point((int)x, (int)y - 10);
+                }
+            }
+            catch
+            { 
+                // bugfix de crash al dar detener dos veces seguidas
             }
         }
         /// <summary>

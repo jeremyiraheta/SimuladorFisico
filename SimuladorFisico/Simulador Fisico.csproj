@@ -81,6 +81,12 @@
       <DependentUpon>MainMenu.cs</DependentUpon>
     </Compile>
     <Compile Include="MovPara.cs" />
+    <Compile Include="Pendulo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Pendulo.Designer.cs">
+      <DependentUpon>Pendulo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Centrifuga.resx">
@@ -91,6 +97,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Parabolic.resx">
       <DependentUpon>Parabolic.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Pendulo.resx">
+      <DependentUpon>Pendulo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -138,6 +147,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\ice.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blue ball.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\red box.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

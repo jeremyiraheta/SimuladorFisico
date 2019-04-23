@@ -37,5 +37,12 @@ namespace SimuladorFisico
             p.Show(this);
             this.Hide();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Pendulo p = new Pendulo();
+            p.Show(this);
+            this.Hide();
+        }
     }
 }
