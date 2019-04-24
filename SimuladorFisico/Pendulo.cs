@@ -13,12 +13,15 @@ namespace SimuladorFisico
 {
     public partial class Pendulo : Form
     {
-        
-        private Timer timer1;
-        private Timer timer2;
-        private Timer gravityTimer;
+
+        private Timer draw;
         private Pen pen;
-        private int gravedadValue;
+        double angulo;
+        int arm_length;
+        double VelocidadAngular;
+        double AceleracionAngular;
+        double GRAVEDAD;
+        double EFICENCIA;
 
         public Pendulo()
         {
@@ -27,84 +30,86 @@ namespace SimuladorFisico
 
         private void Pendulo_Load(object sender, EventArgs e)
         {
+            blueBall.Location = new Point(ClientRectangle.Width / 2, ClientRectangle.Height / 4);
+            redBall.Location = new Point((ClientRectangle.Width / 4)*3, ClientRectangle.Height / 2);
             pen = new Pen(Color.Black);
-            InitTimer();
-            InitTimer2();
-            InitGravityTimer();
-            gravityTimer.Start();
-            gravedadValue = 1;
+            arm_length = 200;
+            AceleracionAngular = 0.0;
+            VelocidadAngular = 0.0;            
+            InitDraw();            
         }
 
         // Inicializar el timer para ejecutar codigo 60 veces por segundo
-        public void InitTimer()
+        public void InitDraw()
         {
-            timer1 = new Timer();
-            timer1.Tick += new EventHandler(timer1_Tick);
-            timer1.Interval = 16; // in miliseconds
-            timer1.Start();
+            draw = new Timer();
+            draw.Tick += new EventHandler(drawTick);
+            draw.Interval = 16; // in miliseconds
+            draw.Start();
         }
         // El codigo que se ejecuta varias veces
-        private void timer1_Tick(object sender, EventArgs e)
+        private void drawTick(object sender, EventArgs e)
         {
+            // Limpiar la pantalla
             this.Invalidate();
-        }
 
-        public void InitTimer2()
-        {
-            timer2 = new Timer();
-            timer2.Tick += new EventHandler(timer2_Tick);
-            timer2.Interval = 16; // in miliseconds
-        }
-        
-        private void timer2_Tick(object sender, EventArgs e)
-        {
-            Point mouse = PointToClient(MousePosition);
-            mouse = new Point(mouse.X - 16, mouse.Y - 16);
-            redBall.Location = mouse;
-        }
+            int x = Convert.ToInt32(blueBall.Location.X + arm_length * Math.Sin(angulo));
+            int y = Convert.ToInt32(blueBall.Location.Y + arm_length * Math.Cos(angulo));
+            redBall.Location = new Point(x, y);
 
-        public void InitGravityTimer()
-        {
-            gravityTimer = new Timer();
-            gravityTimer.Tick += new EventHandler(gravityTimer_Tick);
-            gravityTimer.Interval = 16;
-        }
+            AceleracionAngular = (-1 * GRAVEDAD / arm_length) * Math.Sin(angulo);
 
-        private void gravityTimer_Tick(object sender, EventArgs e)
-        {
-            // objetos afectados por la gravedad van aqui
-            redBall.Location = new Point(redBall.Location.X, redBall.Location.Y + gravedadValue);
-        }
+            angulo += VelocidadAngular;
+            VelocidadAngular += AceleracionAngular;
 
+            // Suavizado del movimiento para no tener "energia infinita"
+            VelocidadAngular *= EFICENCIA;
+
+            label_VelocidadAngular.Text = "Velocidad Angular = " + VelocidadAngular;
+            label_AceleracionAngular.Text = "Aceleracion Angular = " + AceleracionAngular;
+        }
 
         // Detiene la simulacion y llama el formulario padre
         private void Pendulo_FormClosed(object sender, FormClosedEventArgs e)
         {
-            timer1.Stop();
-            timer2.Stop();
-            gravityTimer.Stop();
+            draw.Stop();
             this.Owner.Show();
         }
 
         private void Pendulo_Paint(object sender, PaintEventArgs e)
         {
-            // Draw line between balls
             Graphics g = e.Graphics;
+
+            // Dibujar linea entre bolas
             Point a = new Point(blueBall.Location.X + 16, blueBall.Location.Y + 16);
             Point b = new Point(redBall.Location.X + 16, redBall.Location.Y + 16);
             g.DrawLine(pen, a, b);
         }
 
-        private void redBall_MouseDown(object sender, MouseEventArgs e)
-        {
-            timer2.Start();
-            gravityTimer.Stop();
-        }
+       
 
-        private void redBall_MouseUp(object sender, MouseEventArgs e)
+        private void button_simular_Click(object sender, EventArgs e)
         {
-            timer2.Stop();
-            gravityTimer.Start();
+            if (text_lenBrazo.Text != String.Empty)
+            {
+                arm_length = Convert.ToInt32(text_lenBrazo.Text);
+            }
+
+            if (text_angulo.Text != String.Empty)
+            {
+                angulo = Convert.ToInt32(text_angulo.Text);
+                angulo = angulo * Math.PI / 180;
+            }
+
+            if(text_gravedad.Text != String.Empty)
+            {
+                GRAVEDAD = Convert.ToDouble(text_gravedad.Text);
+            }
+
+            if(text_eficiencia.Text != String.Empty)
+            {
+                EFICENCIA = Convert.ToDouble(text_eficiencia.Text) / 100;
+            }
         }
     }
 }
