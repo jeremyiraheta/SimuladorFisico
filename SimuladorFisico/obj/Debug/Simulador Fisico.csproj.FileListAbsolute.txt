@@ -11,3 +11,4 @@ C:\Users\ezrillex\Source\Repos\jeremyiraheta\SimuladorFisico\SimuladorFisico\obj
 C:\Users\ezrillex\Source\Repos\jeremyiraheta\SimuladorFisico\SimuladorFisico\obj\Debug\Simulador Fisico.csproj.CoreCompileInputs.cache
 C:\Users\ezrillex\Source\Repos\jeremyiraheta\SimuladorFisico\SimuladorFisico\obj\Debug\SimuladorFisico.exe
 C:\Users\ezrillex\Source\Repos\jeremyiraheta\SimuladorFisico\SimuladorFisico\obj\Debug\SimuladorFisico.pdb
+C:\Users\ezrillex\Source\Repos\jeremyiraheta\SimuladorFisico\SimuladorFisico\obj\Debug\SimuladorFisico.PenduloDoble.resources

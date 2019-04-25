@@ -8,36 +8,36 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-
 namespace SimuladorFisico
 {
-    public partial class Pendulo : Form
+    public partial class PenduloDoble : Form
     {
-
         private Timer draw;
         private Pen pen;
         double angulo;
+        double anguloO;
         int arm_length;
         double VelocidadAngular;
         double AceleracionAngular;
         double GRAVEDAD;
         double friccion;
 
-        public Pendulo()
+        public PenduloDoble()
         {
             InitializeComponent();
         }
 
-        private void Pendulo_Load(object sender, EventArgs e)
+        private void PenduloDoble_Load(object sender, EventArgs e)
         {
             blueBall.Location = new Point(ClientRectangle.Width / 2, ClientRectangle.Height / 4);
-            redBall.Location = new Point((ClientRectangle.Width / 4)*3, ClientRectangle.Height / 2);
+            redBall.Location = new Point((ClientRectangle.Width / 4) * 3, ClientRectangle.Height / 2);
             pen = new Pen(Color.Black);
-            arm_length = 200;
+            arm_length = 100;
             AceleracionAngular = 0.0;
-            VelocidadAngular = 0.0;            
-            InitDraw();            
+            VelocidadAngular = 0.0;
+            InitDraw();
         }
+        
 
         // Inicializar el timer para ejecutar codigo 60 veces por segundo
         public void InitDraw()
@@ -53,10 +53,6 @@ namespace SimuladorFisico
             // Limpiar la pantalla
             this.Invalidate();
 
-            int x = Convert.ToInt32(blueBall.Location.X + arm_length * Math.Sin(angulo));
-            int y = Convert.ToInt32(blueBall.Location.Y + arm_length * Math.Cos(angulo));
-            redBall.Location = new Point(x, y);
-
             AceleracionAngular = (-1 * GRAVEDAD / arm_length) * Math.Sin(angulo);
             VelocidadAngular += AceleracionAngular;
             VelocidadAngular *= friccion;
@@ -64,16 +60,20 @@ namespace SimuladorFisico
 
             label_VelocidadAngular.Text = "Velocidad Angular = " + VelocidadAngular;
             label_AceleracionAngular.Text = "Aceleracion Angular = " + AceleracionAngular;
+
+            int x = Convert.ToInt32(blueBall.Location.X + arm_length * Math.Sin(angulo));
+            int y = Convert.ToInt32(blueBall.Location.Y + arm_length * Math.Cos(angulo));
+            redBall.Location = new Point(x, y);
+
+            anguloO = 45 * Math.PI / 180;
+            int xO = Convert.ToInt32(redBall.Location.X + arm_length * Math.Sin(anguloO));
+            int yO = Convert.ToInt32(redBall.Location.Y + arm_length * Math.Cos(anguloO));
+            otherBall.Location = new Point(xO, yO);
         }
 
-        // Detiene la simulacion y llama el formulario padre
-        private void Pendulo_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            draw.Stop();
-            this.Owner.Show();
-        }
+        
 
-        private void Pendulo_Paint(object sender, PaintEventArgs e)
+        private void PenduloDoble_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
 
@@ -81,9 +81,12 @@ namespace SimuladorFisico
             Point a = new Point(blueBall.Location.X + 16, blueBall.Location.Y + 16);
             Point b = new Point(redBall.Location.X + 16, redBall.Location.Y + 16);
             g.DrawLine(pen, a, b);
+
+            Point c = new Point(otherBall.Location.X + 16, otherBall.Location.Y + 16);
+            g.DrawLine(pen, b, c);
         }
 
-       
+
 
         private void button_simular_Click(object sender, EventArgs e)
         {
@@ -100,7 +103,7 @@ namespace SimuladorFisico
                 angulo = angulo * Math.PI / 180;
             }
 
-            if(text_gravedad.Text != String.Empty)
+            if (text_gravedad.Text != String.Empty)
             {
                 GRAVEDAD = Convert.ToDouble(text_gravedad.Text);
             }
@@ -108,6 +111,12 @@ namespace SimuladorFisico
             friccion = 100 - Convert.ToInt32(numericUpDown_friccion.Value);
             friccion = friccion / 100;
 
+        }
+
+        private void PenduloDoble_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            draw.Stop();
+            this.Owner.Show();
         }
     }
 }
