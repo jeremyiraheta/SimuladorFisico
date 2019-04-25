@@ -87,6 +87,12 @@
     <Compile Include="Pendulo.Designer.cs">
       <DependentUpon>Pendulo.cs</DependentUpon>
     </Compile>
+    <Compile Include="PenduloDoble.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PenduloDoble.Designer.cs">
+      <DependentUpon>PenduloDoble.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Centrifuga.resx">
@@ -100,6 +106,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Pendulo.resx">
       <DependentUpon>Pendulo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PenduloDoble.resx">
+      <DependentUpon>PenduloDoble.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

@@ -40,9 +40,10 @@
             this.text_gravedad = new System.Windows.Forms.TextBox();
             this.label_VelocidadAngular = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.text_eficiencia = new System.Windows.Forms.TextBox();
+            this.numericUpDown_friccion = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.redBall)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.blueBall)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_friccion)).BeginInit();
             this.SuspendLayout();
             // 
             // label_ArmLen
@@ -136,7 +137,7 @@
             this.text_gravedad.Name = "text_gravedad";
             this.text_gravedad.Size = new System.Drawing.Size(47, 20);
             this.text_gravedad.TabIndex = 9;
-            this.text_gravedad.Text = "0.8";
+            this.text_gravedad.Text = "9.8";
             // 
             // label_VelocidadAngular
             // 
@@ -150,19 +151,23 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(587, 87);
+            this.label1.Location = new System.Drawing.Point(596, 86);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 13);
+            this.label1.Size = new System.Drawing.Size(47, 13);
             this.label1.TabIndex = 11;
-            this.label1.Text = "Eficiencia:";
+            this.label1.Text = "Friccion:";
             // 
-            // text_eficiencia
+            // numericUpDown_friccion
             // 
-            this.text_eficiencia.Location = new System.Drawing.Point(649, 84);
-            this.text_eficiencia.Name = "text_eficiencia";
-            this.text_eficiencia.Size = new System.Drawing.Size(47, 20);
-            this.text_eficiencia.TabIndex = 12;
-            this.text_eficiencia.Text = "99";
+            this.numericUpDown_friccion.Location = new System.Drawing.Point(649, 84);
+            this.numericUpDown_friccion.Name = "numericUpDown_friccion";
+            this.numericUpDown_friccion.Size = new System.Drawing.Size(47, 20);
+            this.numericUpDown_friccion.TabIndex = 12;
+            this.numericUpDown_friccion.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // Pendulo
             // 
@@ -170,7 +175,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(704, 441);
-            this.Controls.Add(this.text_eficiencia);
+            this.Controls.Add(this.numericUpDown_friccion);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label_VelocidadAngular);
             this.Controls.Add(this.text_gravedad);
@@ -190,6 +195,7 @@
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Pendulo_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.redBall)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.blueBall)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_friccion)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -209,6 +215,6 @@
         private System.Windows.Forms.TextBox text_gravedad;
         private System.Windows.Forms.Label label_VelocidadAngular;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox text_eficiencia;
+        private System.Windows.Forms.NumericUpDown numericUpDown_friccion;
     }
 }
