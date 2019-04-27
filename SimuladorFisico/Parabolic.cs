@@ -18,21 +18,13 @@ namespace SimuladorFisico
         MovPara cp;
         double secs;
         Timer nt;
-        int escala = SCALE;
-        // The original image.
-        private Bitmap OriginalBitmap;
-
-        // The rotated image.
-        private Bitmap RotatedBitmap;
-
-        // The center of the bitmap.
-        private PointF ImageCenter;
-
-        // The current angle of rotation during a drag.
-        private float CurrentAngle = 0;
-
-        // The total angle rotated so far in previous drags.
+        int escala = SCALE;        
+        private Bitmap OriginalBitmap;           
+        private Bitmap RotatedBitmap;        
+        private PointF ImageCenter;        
+        private float CurrentAngle = 0;        
         private float TotalAngle = 0;
+        private bool running=false;
         public Parabolic()
         {
             InitializeComponent();
@@ -79,22 +71,28 @@ namespace SimuladorFisico
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void c_Lstart_Click(object sender, EventArgs e)
-        {                        
-            nt = new Timer();
-            nt.Interval = 100;
-            escala = SCALE;
-            nt.Tick += Nt_Tick;
-            if (!(c_TBAngle.Text == "" || c_TBVel.Text == ""))
+        {
+            if (running)
+                MessageBox.Show("Detenga la simulacion primero!", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            if(!running && c_PBBall.Location.X ==0)
             {
-                cp = new MovPara(double.Parse(c_TBVel.Text), double.Parse(c_TBAngle.Text), (double)c_CBGrav.SelectedValue);
-                nt.Start();
-                c_LY.Text = String.Format("{0:0.00} mts", cp.Ymax);
-                c_LX.Text = String.Format("{0:0.00} mts", cp.Xmax);
-                c_LT.Text = String.Format("{0:0.00} seg", cp.Secmax);
-                c_LVx.Text = String.Format("{0:0.00} m/s", cp.Vx());
-                c_PBArrow.Visible = false;
+                nt = new Timer();
+                nt.Interval = 100;
+                escala = SCALE;
+                nt.Tick += Nt_Tick;
+
+                if (!(c_TBAngle.Text == "" || c_TBVel.Text == ""))
+                {
+                    cp = new MovPara(double.Parse(c_TBVel.Text), double.Parse(c_TBAngle.Text), (double)c_CBGrav.SelectedValue);
+                    nt.Start();
+                    c_LY.Text = String.Format("{0:0.00} mts", cp.Ymax);
+                    c_LX.Text = String.Format("{0:0.00} mts", cp.Xmax);
+                    c_LT.Text = String.Format("{0:0.00} seg", cp.Secmax);
+                    c_LVx.Text = String.Format("{0:0.00} m/s", cp.Vx());
+                    c_PBArrow.Visible = false;
+                    running = true;
+                }
             }
-            
         }
         /// <summary>
         /// Evento que anima cada decima de segundo el movimiento del objeto
@@ -112,6 +110,7 @@ namespace SimuladorFisico
                     ((Timer)sender).Stop();
                     c_LAx.Text = string.Format("{0:0.00} mts", cp.Xmax);
                     c_LAy.Text = string.Format("{0:0.00} mts", 0);
+                    running = false;                  
                 }
                 else
                 {
@@ -254,11 +253,13 @@ namespace SimuladorFisico
             secs = 0;
             escala = SCALE;
             c_PBBall.Location = new Point(0,(int)CCY(0));
-            c_PBArrow.Visible = true;
-            this.Invalidate();
+            c_PBArrow.Visible = true;           
             cp = null;
-            if(nt != null)
+            this.Invalidate();
+            if (nt != null)
                 nt.Stop();
+            running = false;
+            
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)

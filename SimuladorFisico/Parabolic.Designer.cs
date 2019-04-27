@@ -53,8 +53,8 @@
             this.c_Track = new System.Windows.Forms.TrackBar();
             this.tt = new System.Windows.Forms.ToolTip(this.components);
             this.c_LVx = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
             this.c_LVy = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.c_PBBall)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.c_PBArrow)).BeginInit();
@@ -102,6 +102,7 @@
             this.c_TBVel.Name = "c_TBVel";
             this.c_TBVel.Size = new System.Drawing.Size(106, 20);
             this.c_TBVel.TabIndex = 3;
+            this.c_TBVel.Text = "50";
             this.tt.SetToolTip(this.c_TBVel, "Seleccione la velocidad inicial 0-100");
             this.c_TBVel.TextChanged += new System.EventHandler(this.c_CBVel_TextChanged);
             // 
@@ -290,7 +291,7 @@
             this.c_Track.Size = new System.Drawing.Size(247, 45);
             this.c_Track.SmallChange = 10;
             this.c_Track.TabIndex = 20;
-            this.c_Track.Value = 1;
+            this.c_Track.Value = 50;
             this.c_Track.Scroll += new System.EventHandler(this.c_Track_Scroll);
             // 
             // c_LVx
@@ -305,16 +306,6 @@
             this.c_LVx.Text = "0";
             this.tt.SetToolTip(this.c_LVx, "Segundos que el objeto permance en movimiento");
             // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.BackColor = System.Drawing.Color.Transparent;
-            this.label10.Location = new System.Drawing.Point(1091, 588);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(25, 13);
-            this.label10.TabIndex = 21;
-            this.label10.Text = "Vx: ";
-            // 
             // c_LVy
             // 
             this.c_LVy.AutoSize = true;
@@ -326,6 +317,16 @@
             this.c_LVy.TabIndex = 24;
             this.c_LVy.Text = "0";
             this.tt.SetToolTip(this.c_LVy, "Segundos que el objeto permance en movimiento");
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.BackColor = System.Drawing.Color.Transparent;
+            this.label10.Location = new System.Drawing.Point(1091, 588);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(25, 13);
+            this.label10.TabIndex = 21;
+            this.label10.Text = "Vx: ";
             // 
             // label12
             // 
