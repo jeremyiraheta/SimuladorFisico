@@ -14,13 +14,20 @@ namespace SimuladorFisico
     {
         private Timer draw;
         private Pen pen;
-        double angulo;
-        double anguloO;
-        int arm_length;
-        double VelocidadAngular;
-        double AceleracionAngular;
-        double GRAVEDAD;
-        double friccion;
+
+        Point CENTER;
+
+        double r1 = 100;
+        double r2 = 100;
+        double m1 = 10;
+        double m2 = 10;
+        double a1 = 0;
+        double a2 = 0;
+        double a1_v = 0;
+        double a2_v = 0;
+        
+        double g = 1;
+
 
         public PenduloDoble()
         {
@@ -29,22 +36,22 @@ namespace SimuladorFisico
 
         private void PenduloDoble_Load(object sender, EventArgs e)
         {
-            blueBall.Location = new Point(ClientRectangle.Width / 2, ClientRectangle.Height / 4);
-            redBall.Location = new Point((ClientRectangle.Width / 4) * 3, ClientRectangle.Height / 2);
+            CENTER = new Point(ClientRectangle.Width / 2, ClientRectangle.Height / 4);
+            blueBall.Location = CENTER;
+            //redBall.Location = new Point((ClientRectangle.Width / 4) * 3, ClientRectangle.Height / 2);
             pen = new Pen(Color.Black);
-            arm_length = 100;
-            AceleracionAngular = 0.0;
-            VelocidadAngular = 0.0;
+            //arm_length = 100;
+            //AceleracionAngular = 0.0;
+            //VelocidadAngular = 0.0;
             InitDraw();
         }
-        
 
         // Inicializar el timer para ejecutar codigo 60 veces por segundo
         public void InitDraw()
         {
             draw = new Timer();
             draw.Tick += new EventHandler(drawTick);
-            draw.Interval = 10; // in miliseconds
+            draw.Interval = 13; // in miliseconds
             draw.Start();
         }
         // El codigo que se ejecuta varias veces
@@ -53,22 +60,38 @@ namespace SimuladorFisico
             // Limpiar la pantalla
             this.Invalidate();
 
-            AceleracionAngular = (-1 * GRAVEDAD / arm_length) * Math.Sin(angulo);
-            VelocidadAngular += AceleracionAngular;
-            VelocidadAngular *= friccion;
-            angulo += VelocidadAngular;
+            double num1 = -g * (2 * m1 + m2) * Math.Sin(a1);
+            double num2 = -m2 * g * Math.Sin(a1 - 2 * a2);
+            double num3 = -2 * Math.Sin(a1 - a2) * m2;
+            double num4 = a2_v * a2_v * r2 + a1_v * a1_v * r1 * Math.Cos(a1 - a2);
+            double den = r1 * (2 * m1 + m2 - m2 * Math.Cos(2 * a1 - 2 * a2));
 
-            label_VelocidadAngular.Text = "Velocidad Angular = " + VelocidadAngular;
-            label_AceleracionAngular.Text = "Aceleracion Angular = " + AceleracionAngular;
+            double a1_a = (num1 + num2 + num3 * num4) / den;
 
-            int x = Convert.ToInt32(blueBall.Location.X + arm_length * Math.Sin(angulo));
-            int y = Convert.ToInt32(blueBall.Location.Y + arm_length * Math.Cos(angulo));
-            redBall.Location = new Point(x, y);
+            num1 = 2 * Math.Sin(a1 - a2);
+            num2 = (a1_v * a1_v * r1 * (m1 + m2));
+            num3 = g * (m1 + m2) * Math.Cos(a1);
+            num4 = a2_v * a2_v * r2 * m2 * Math.Cos(a1 - a2);
+            den = r2 * (2 * m1 + m2 - m2 * Math.Cos(2 * a1 - 2 * a2));
 
-            anguloO = 45 * Math.PI / 180;
-            int xO = Convert.ToInt32(redBall.Location.X + arm_length * Math.Sin(anguloO));
-            int yO = Convert.ToInt32(redBall.Location.Y + arm_length * Math.Cos(anguloO));
-            otherBall.Location = new Point(xO, yO);
+            double a2_a = num1 * (num2 + num3 + num4) / den;
+
+            a1_v += a1_a;
+            a2_v += a2_a;
+            a1 += a1_v;
+            a2 += a2_v;
+
+
+            int x1 = Convert.ToInt32(CENTER.X + r1 * Math.Sin(a1));
+            int y1 = Convert.ToInt32(CENTER.Y + r1 * Math.Cos(a1));
+
+            redBall.Location = new Point(x1, y1);
+
+            int x2 = Convert.ToInt32(x1 + r2 * Math.Sin(a2));
+            int y2 = Convert.ToInt32(y1 + r2 * Math.Cos(a2));
+
+            otherBall.Location = new Point(x2, y2);
+            
         }
 
         
@@ -90,27 +113,51 @@ namespace SimuladorFisico
 
         private void button_simular_Click(object sender, EventArgs e)
         {
-            AceleracionAngular = 0.0;
-            VelocidadAngular = 0.0;
-            if (text_lenBrazo.Text != String.Empty)
+            a1_v = 0;
+            a2_v = 0;
+
+            // r1
+            if (text_brazo1.Text != String.Empty)
             {
-                arm_length = Convert.ToInt32(text_lenBrazo.Text);
+                r1 = Convert.ToInt32(text_brazo1.Text);
             }
 
-            if (text_angulo.Text != String.Empty)
+            // r2
+
+            if (text_brazo2.Text != String.Empty)
             {
-                angulo = Convert.ToInt32(text_angulo.Text);
-                angulo = angulo * Math.PI / 180;
+                r2 = Convert.ToInt32(text_brazo2.Text);
             }
 
+            // angulo 1
+            if (text_angulo1.Text != String.Empty)
+            {
+                a1 = Convert.ToInt32(text_angulo1.Text);
+                a1 = a1 * Math.PI / 180;
+            }
+            // angulo 2
+
+            if (text_angulo2.Text != String.Empty)
+            {
+                a2 = Convert.ToInt32(text_angulo2.Text);
+                a2 = a2 * Math.PI / 180;
+            }
+
+            // constante g
             if (text_gravedad.Text != String.Empty)
             {
-                GRAVEDAD = Convert.ToDouble(text_gravedad.Text);
+                g = Convert.ToInt32(text_gravedad.Text);
             }
-
-            friccion = 100 - Convert.ToInt32(numericUpDown_friccion.Value);
-            friccion = friccion / 100;
-
+            // masa 1
+            if (text_masa1.Text != String.Empty)
+            {
+                m1 = Convert.ToInt32(text_masa1.Text);
+            }
+            // masa 2
+            if (text_masa2.Text != String.Empty)
+            {
+                m2 = Convert.ToInt32(text_masa2.Text);
+            }
         }
 
         private void PenduloDoble_FormClosed(object sender, FormClosedEventArgs e)
@@ -118,5 +165,8 @@ namespace SimuladorFisico
             draw.Stop();
             this.Owner.Show();
         }
+
+       
+
     }
 }
