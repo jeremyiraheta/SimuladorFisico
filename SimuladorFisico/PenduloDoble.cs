@@ -34,19 +34,22 @@ namespace SimuladorFisico
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Al abrir el formulario este metodo inicializa la posicion de los objetos bola y crea un lapiz y inicializa el constructor de 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PenduloDoble_Load(object sender, EventArgs e)
         {
             CENTER = new Point(ClientRectangle.Width / 2, ClientRectangle.Height / 4);
             blueBall.Location = CENTER;
-            //redBall.Location = new Point((ClientRectangle.Width / 4) * 3, ClientRectangle.Height / 2);
             pen = new Pen(Color.Black);
-            //arm_length = 100;
-            //AceleracionAngular = 0.0;
-            //VelocidadAngular = 0.0;
             InitDraw();
         }
 
-        // Inicializar el timer para ejecutar codigo 60 veces por segundo
+        /// <summary>
+        /// Este metodo se encarga de inicializar el objeto Timer que realiza los calculos cada segundo de la simulacion.
+        /// </summary>
         public void InitDraw()
         {
             draw = new Timer();
@@ -54,7 +57,12 @@ namespace SimuladorFisico
             draw.Interval = 13; // in miliseconds
             draw.Start();
         }
-        // El codigo que se ejecuta varias veces
+        
+        /// <summary>
+        /// Este metodo realiza los calculos y actualiza la posicion de las bolas en la pantalla.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void drawTick(object sender, EventArgs e)
         {
             // Limpiar la pantalla
@@ -95,11 +103,15 @@ namespace SimuladorFisico
         }
 
         
-
+        /// <summary>
+        /// Este metodo se encarga de dibujar las lineas entre los objetos de bola.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PenduloDoble_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
             // Dibujar linea entre bolas
             Point a = new Point(blueBall.Location.X + 16, blueBall.Location.Y + 16);
             Point b = new Point(redBall.Location.X + 16, redBall.Location.Y + 16);
@@ -107,10 +119,16 @@ namespace SimuladorFisico
 
             Point c = new Point(otherBall.Location.X + 16, otherBall.Location.Y + 16);
             g.DrawLine(pen, b, c);
+            
         }
 
 
-
+        /// <summary>
+        /// Esta funcion se encarga de Parsear los valores dados en las cajas de texto e introduce esos datos en las
+        /// variables que utiliza la simulacion para realizar sus calculos.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void button_simular_Click(object sender, EventArgs e)
         {
             a1_v = 0;
@@ -158,15 +176,41 @@ namespace SimuladorFisico
             {
                 m2 = Convert.ToInt32(text_masa2.Text);
             }
+
+            button2.Enabled = true;
+            button2.Text = "Pausar";
+            draw.Start();
+
         }
 
+        /// <summary>
+        /// Esta funcion regresa al menu principal al haber hecho click en el boton de cerrar ventana.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PenduloDoble_FormClosed(object sender, FormClosedEventArgs e)
         {
             draw.Stop();
             this.Owner.Show();
         }
 
-       
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("<Informacion de ayuda aqui>", "Ayuda", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            if(button2.Text == "Pausar")
+            {
+                button2.Text = "Continuar";
+                draw.Stop();
+            }
+            else
+            {
+                button2.Text = "Pausar";
+                draw.Start();
+            }
+        }
     }
 }

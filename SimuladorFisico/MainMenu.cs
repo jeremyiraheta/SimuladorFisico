@@ -27,8 +27,6 @@ namespace SimuladorFisico
             Parabolic p = new Parabolic();
             p.Show(this);
             this.Hide();
-                
-
         }
 
         private void c_BTCentrif_Click(object sender, EventArgs e)
@@ -48,6 +46,18 @@ namespace SimuladorFisico
         private void button2_Click(object sender, EventArgs e)
         {
             PenduloDoble p = new PenduloDoble();
+            p.Show(this);
+            this.Hide();
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Coloumb p = new Coloumb();
             p.Show(this);
             this.Hide();
         }

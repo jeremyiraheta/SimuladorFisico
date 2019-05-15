@@ -67,6 +67,12 @@
     <Compile Include="Centrifuga.Designer.cs">
       <DependentUpon>Centrifuga.cs</DependentUpon>
     </Compile>
+    <Compile Include="Coloumb.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Coloumb.Designer.cs">
+      <DependentUpon>Coloumb.cs</DependentUpon>
+    </Compile>
     <Compile Include="FCentri.cs" />
     <Compile Include="Parabolic.cs">
       <SubType>Form</SubType>
@@ -98,6 +104,9 @@
     <EmbeddedResource Include="Centrifuga.resx">
       <DependentUpon>Centrifuga.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Coloumb.resx">
+      <DependentUpon>Coloumb.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </EmbeddedResource>
@@ -112,18 +121,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -162,6 +171,24 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\red box.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\salir1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\doble.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\simple.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\parabolico.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\centrifuga.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\colon.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

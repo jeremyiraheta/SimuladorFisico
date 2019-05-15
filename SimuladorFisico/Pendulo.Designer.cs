@@ -41,6 +41,8 @@
             this.label_VelocidadAngular = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.numericUpDown_friccion = new System.Windows.Forms.NumericUpDown();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button_Pausa = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.redBall)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.blueBall)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown_friccion)).BeginInit();
@@ -108,17 +110,17 @@
             this.label_AceleracionAngular.AutoSize = true;
             this.label_AceleracionAngular.Location = new System.Drawing.Point(12, 419);
             this.label_AceleracionAngular.Name = "label_AceleracionAngular";
-            this.label_AceleracionAngular.Size = new System.Drawing.Size(114, 13);
+            this.label_AceleracionAngular.Size = new System.Drawing.Size(133, 13);
             this.label_AceleracionAngular.TabIndex = 6;
-            this.label_AceleracionAngular.Text = "Aceleracion Angular = ";
+            this.label_AceleracionAngular.Text = "Aceleracion Angular u/s = ";
             // 
             // button_simular
             // 
-            this.button_simular.Location = new System.Drawing.Point(576, 110);
+            this.button_simular.Location = new System.Drawing.Point(636, 110);
             this.button_simular.Name = "button_simular";
-            this.button_simular.Size = new System.Drawing.Size(120, 23);
+            this.button_simular.Size = new System.Drawing.Size(60, 23);
             this.button_simular.TabIndex = 7;
-            this.button_simular.Text = "Modificar Simulacion";
+            this.button_simular.Text = "Simular!";
             this.button_simular.UseVisualStyleBackColor = true;
             this.button_simular.Click += new System.EventHandler(this.button_simular_Click);
             // 
@@ -144,9 +146,9 @@
             this.label_VelocidadAngular.AutoSize = true;
             this.label_VelocidadAngular.Location = new System.Drawing.Point(21, 406);
             this.label_VelocidadAngular.Name = "label_VelocidadAngular";
-            this.label_VelocidadAngular.Size = new System.Drawing.Size(105, 13);
+            this.label_VelocidadAngular.Size = new System.Drawing.Size(124, 13);
             this.label_VelocidadAngular.TabIndex = 10;
-            this.label_VelocidadAngular.Text = "Velocidad Angular = ";
+            this.label_VelocidadAngular.Text = "Velocidad Angular u/s = ";
             // 
             // label1
             // 
@@ -169,12 +171,35 @@
             0,
             0});
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(666, 398);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(26, 31);
+            this.button1.TabIndex = 13;
+            this.button1.Text = "?";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button_Pausa
+            // 
+            this.button_Pausa.Enabled = false;
+            this.button_Pausa.Location = new System.Drawing.Point(636, 139);
+            this.button_Pausa.Name = "button_Pausa";
+            this.button_Pausa.Size = new System.Drawing.Size(60, 23);
+            this.button_Pausa.TabIndex = 14;
+            this.button_Pausa.Text = "Pausar";
+            this.button_Pausa.UseVisualStyleBackColor = true;
+            this.button_Pausa.Click += new System.EventHandler(this.button_Pausa_Click);
+            // 
             // Pendulo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(704, 441);
+            this.Controls.Add(this.button_Pausa);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.numericUpDown_friccion);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.label_VelocidadAngular);
@@ -216,5 +241,7 @@
         private System.Windows.Forms.Label label_VelocidadAngular;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown numericUpDown_friccion;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button_Pausa;
     }
 }

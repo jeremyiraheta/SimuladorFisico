@@ -46,6 +46,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.text_masa1 = new System.Windows.Forms.TextBox();
             this.text_masa2 = new System.Windows.Forms.TextBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.otherBall)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.redBall)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.blueBall)).BeginInit();
@@ -70,11 +72,11 @@
             // 
             // button_simular
             // 
-            this.button_simular.Location = new System.Drawing.Point(626, 197);
+            this.button_simular.Location = new System.Drawing.Point(630, 194);
             this.button_simular.Name = "button_simular";
-            this.button_simular.Size = new System.Drawing.Size(66, 37);
+            this.button_simular.Size = new System.Drawing.Size(66, 24);
             this.button_simular.TabIndex = 20;
-            this.button_simular.Text = "Modificar Simulacion";
+            this.button_simular.Text = "Simular!";
             this.button_simular.UseVisualStyleBackColor = true;
             this.button_simular.Click += new System.EventHandler(this.button_simular_Click);
             // 
@@ -214,12 +216,35 @@
             this.text_masa2.TabIndex = 34;
             this.text_masa2.Text = "10";
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(666, 398);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(26, 31);
+            this.button1.TabIndex = 35;
+            this.button1.Text = "?";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // button2
+            // 
+            this.button2.Enabled = false;
+            this.button2.Location = new System.Drawing.Point(630, 224);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(66, 24);
+            this.button2.TabIndex = 36;
+            this.button2.Text = "Pausar";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // PenduloDoble
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(704, 441);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.text_masa2);
             this.Controls.Add(this.text_masa1);
             this.Controls.Add(this.label4);
@@ -270,5 +295,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox text_masa1;
         private System.Windows.Forms.TextBox text_masa2;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button button2;
     }
 }

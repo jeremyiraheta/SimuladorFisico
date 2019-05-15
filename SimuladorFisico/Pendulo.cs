@@ -62,8 +62,8 @@ namespace SimuladorFisico
             VelocidadAngular *= friccion;
             angulo += VelocidadAngular;
 
-            label_VelocidadAngular.Text = "Velocidad Angular = " + VelocidadAngular;
-            label_AceleracionAngular.Text = "Aceleracion Angular = " + AceleracionAngular;
+            label_VelocidadAngular.Text = "Velocidad Angular = " + VelocidadAngular + "u/s";
+            label_AceleracionAngular.Text = "Aceleracion Angular = " + AceleracionAngular + "u/s";
         }
 
         // Detiene la simulacion y llama el formulario padre
@@ -76,7 +76,8 @@ namespace SimuladorFisico
         private void Pendulo_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-
+            g.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.AntiAlias;
+            
             // Dibujar linea entre bolas
             Point a = new Point(blueBall.Location.X + 16, blueBall.Location.Y + 16);
             Point b = new Point(redBall.Location.X + 16, redBall.Location.Y + 16);
@@ -107,6 +108,32 @@ namespace SimuladorFisico
 
             friccion = 100 - Convert.ToInt32(numericUpDown_friccion.Value);
             friccion = friccion / 100;
+
+            button_Pausa.Enabled = true;
+            draw.Start();
+            button_Pausa.Text = "Pausar";
+            
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("<Informacion de ayuda aqui>", "Ayuda", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void button_Pausa_Click(object sender, EventArgs e)
+        {
+            if(button_Pausa.Text == "Pausar")
+            {
+                draw.Stop();
+                button_Pausa.Text = "Continuar";
+            }
+            else
+            {
+                draw.Start();
+                button_Pausa.Text = "Pausar";
+            }
+            
 
         }
     }
