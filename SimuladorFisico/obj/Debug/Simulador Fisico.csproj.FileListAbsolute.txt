@@ -27,3 +27,18 @@ C:\Users\ezrillex\Desktop\proyecto\SimuladorFisico-master\SimuladorFisico\obj\De
 C:\Users\ezrillex\Desktop\proyecto\SimuladorFisico-master\SimuladorFisico\obj\Debug\SimuladorFisico.exe
 C:\Users\ezrillex\Desktop\proyecto\SimuladorFisico-master\SimuladorFisico\obj\Debug\SimuladorFisico.pdb
 C:\Users\ezrillex\Desktop\proyecto\SimuladorFisico-master\SimuladorFisico\obj\Debug\SimuladorFisico.Coloumb.resources
+C:\Users\ezrillex\Desktop\SimuladorFisico-master\SimuladorFisico\bin\Debug\SimuladorFisico.exe.config
+C:\Users\ezrillex\Desktop\SimuladorFisico-master\SimuladorFisico\bin\Debug\SimuladorFisico.exe
+C:\Users\ezrillex\Desktop\SimuladorFisico-master\SimuladorFisico\bin\Debug\SimuladorFisico.pdb
+C:\Users\ezrillex\Desktop\SimuladorFisico-master\SimuladorFisico\obj\Debug\Simulador Fisico.csprojAssemblyReference.cache
+C:\Users\ezrillex\Desktop\SimuladorFisico-master\SimuladorFisico\obj\Debug\SimuladorFisico.Centrifuga.resources
+C:\Users\ezrillex\Desktop\SimuladorFisico-master\SimuladorFisico\obj\Debug\SimuladorFisico.Coloumb.resources
+C:\Users\ezrillex\Desktop\SimuladorFisico-master\SimuladorFisico\obj\Debug\SimuladorFisico.MainMenu.resources
+C:\Users\ezrillex\Desktop\SimuladorFisico-master\SimuladorFisico\obj\Debug\SimuladorFisico.Parabolic.resources
+C:\Users\ezrillex\Desktop\SimuladorFisico-master\SimuladorFisico\obj\Debug\SimuladorFisico.Pendulo.resources
+C:\Users\ezrillex\Desktop\SimuladorFisico-master\SimuladorFisico\obj\Debug\SimuladorFisico.PenduloDoble.resources
+C:\Users\ezrillex\Desktop\SimuladorFisico-master\SimuladorFisico\obj\Debug\SimuladorFisico.Properties.Resources.resources
+C:\Users\ezrillex\Desktop\SimuladorFisico-master\SimuladorFisico\obj\Debug\Simulador Fisico.csproj.GenerateResource.cache
+C:\Users\ezrillex\Desktop\SimuladorFisico-master\SimuladorFisico\obj\Debug\Simulador Fisico.csproj.CoreCompileInputs.cache
+C:\Users\ezrillex\Desktop\SimuladorFisico-master\SimuladorFisico\obj\Debug\SimuladorFisico.exe
+C:\Users\ezrillex\Desktop\SimuladorFisico-master\SimuladorFisico\obj\Debug\SimuladorFisico.pdb
