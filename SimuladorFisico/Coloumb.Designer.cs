@@ -35,6 +35,8 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label_distance = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.trackBar2)).BeginInit();
             this.SuspendLayout();
@@ -98,17 +100,40 @@
             // label_distance
             // 
             this.label_distance.AutoSize = true;
-            this.label_distance.Location = new System.Drawing.Point(318, 25);
+            this.label_distance.Location = new System.Drawing.Point(453, 494);
             this.label_distance.Name = "label_distance";
-            this.label_distance.Size = new System.Drawing.Size(47, 13);
+            this.label_distance.Size = new System.Drawing.Size(77, 13);
             this.label_distance.TabIndex = 6;
-            this.label_distance.Text = "distance";
+            this.label_distance.Text = "Distancia: 5cm";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Tai Le", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(358, 37);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(88, 27);
+            this.label5.TabIndex = 7;
+            this.label5.Text = "Fuerza: ";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Tai Le", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(358, 85);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(116, 27);
+            this.label6.TabIndex = 8;
+            this.label6.Text = "Direccion: ";
             // 
             // Coloumb
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.ClientSize = new System.Drawing.Size(1000, 561);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.label_distance);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -138,5 +163,7 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label_distance;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
     }
 }

@@ -19,6 +19,9 @@ namespace SimuladorFisico
         private Pen blackpen = new Pen(Color.Black, 3);
         private System.Drawing.SolidBrush myBrush = new System.Drawing.SolidBrush(System.Drawing.Color.Red);
 
+        /// <summary>
+        /// Constructor del formulario de simulacion de coloumb
+        /// </summary>
         public Coloumb()
         {
             InitializeComponent();
@@ -29,6 +32,9 @@ namespace SimuladorFisico
             q2 = new Rectangle((ClientRectangle.Width / 4) * 3, ClientRectangle.Height / 2 - 25, 50, 50);
         }
 
+        /// <summary>
+        /// Constructor del Timer que procesa los calculos
+        /// </summary>
         public void InitTick()
         {
             tick = new Timer();
@@ -37,6 +43,11 @@ namespace SimuladorFisico
             tick.Start();
         }
 
+        /// <summary>
+        /// Metodo en el que se realizan los calculos
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void processTick(object sender, EventArgs e)
         {
             this.Refresh();
@@ -46,7 +57,28 @@ namespace SimuladorFisico
             MyGraphics.DrawEllipse(blackpen, q2);
 
             MyGraphics.DrawLine(blackpen, q1.Location.X +25, q1.Location.Y -100, q1.Location.X + 25 + ConvertValueToUnit(trackBar1.Value) * 15, q1.Location.Y - 100);
-            label_distance.Text = (q2.Location.X - q1.Location.X).ToString();
+            label_distance.Text = "Distancia: " + (q2.Location.X - q1.Location.X).ToString() + " cm";
+            label5.Text = "Fuerza: "+ force()  +" N";
+            if (ConvertValueToUnit(trackBar1.Value) > 0 & ConvertValueToUnit(trackBar2.Value) > 0)
+            {
+                label6.Text = "Direccion: Repulsion";
+            }
+            if (ConvertValueToUnit(trackBar1.Value) < 0 & ConvertValueToUnit(trackBar2.Value) > 0)
+            {
+                label6.Text = "Direccion: Atraccion";
+            }
+            if (ConvertValueToUnit(trackBar1.Value) > 0 & ConvertValueToUnit(trackBar2.Value) < 0)
+            {
+                label6.Text = "Direccion: Atraccion";
+            }
+            if (ConvertValueToUnit(trackBar1.Value) < 0 & ConvertValueToUnit(trackBar2.Value) < 0)
+            {
+                label6.Text = "Direccion: Repulsion";
+            }
+            if (ConvertValueToUnit(trackBar1.Value) == 0 | ConvertValueToUnit(trackBar2.Value) == 0)
+            {
+                label6.Text = "Direccion: Neutral";
+            }
             //label_distance.Text = ClientRectangle.Width.ToString();
         }
 
@@ -66,11 +98,21 @@ namespace SimuladorFisico
             
         }
 
+        /// <summary>
+        /// TrackBar actualiza una label con el valor que este tiene
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TrackBar1_ValueChanged(object sender, EventArgs e)
         {
             label3.Text = ConvertValueToUnit(trackBar1.Value) + " uC";
         }
 
+        /// <summary>
+        /// Convierte de la escala de 1 a 20 del Trackbar a la escala de la simulacion de -10 a +10
+        /// </summary>
+        /// <param name="a"></param>
+        /// <returns></returns>
         private int ConvertValueToUnit(int a) {
             switch (a)
             {
@@ -121,6 +163,11 @@ namespace SimuladorFisico
             }
         }
 
+        /// <summary>
+        /// Actualiza la label asociada al trackbar con el valor actual del Trackbar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TrackBar2_ValueChanged(object sender, EventArgs e)
         {
             label4.Text = ConvertValueToUnit(trackBar2.Value) + " uC";
@@ -131,10 +178,20 @@ namespace SimuladorFisico
             
         }
 
-        private double force(int q1, int q2, int distance)
+        /// <summary>
+        /// Metodo para calcular la fuerza de coloumb
+        /// </summary>
+        /// <returns></returns>
+        private double force()
         {
             double k = 9000000000;
-            return 0;
+            int a = ConvertValueToUnit(trackBar1.Value);
+            int b = ConvertValueToUnit(trackBar2.Value);
+            double distancia = 5;
+
+            double force = (k * (a * 0.0000001) * (b*0.0000001));
+            force /= (distancia * distancia);
+            return force;
         }
     }
 }
