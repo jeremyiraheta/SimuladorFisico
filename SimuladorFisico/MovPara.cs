@@ -7,9 +7,11 @@ using System.Drawing;
 
 namespace SimuladorFisico
 {
+    /// <summary>
+    /// Realiza los calculos matematicos para calcular posicion de proyectil en N segundos para el movimiento parabolico
+    /// </summary>
     class MovPara
     {
-
         private double vi;        
         private double ang;
         private double g;
@@ -99,6 +101,5 @@ namespace SimuladorFisico
         {
             return (Math.PI / 180) * grad;
         }
-        
     }
 }

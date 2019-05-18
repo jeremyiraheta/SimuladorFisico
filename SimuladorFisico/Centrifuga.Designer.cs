@@ -224,7 +224,6 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Centrifuga";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Centrifuga_FormClosed);
-            this.Load += new System.EventHandler(this.Centrifuga_Load);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Centrifuga_Paint);
             ((System.ComponentModel.ISupportInitialize)(this.error)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.c_tab)).EndInit();

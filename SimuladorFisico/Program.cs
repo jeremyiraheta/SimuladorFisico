@@ -8,6 +8,18 @@ namespace SimuladorFisico
 {
     static class Program
     {
+        public static MainMenu adsa
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+
+            set
+            {
+            }
+        }
+
         /// <summary>
         /// Punto de entrada principal para la aplicación.
         /// </summary>

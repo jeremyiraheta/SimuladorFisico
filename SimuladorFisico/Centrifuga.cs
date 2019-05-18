@@ -11,6 +11,9 @@ using System.Windows.Forms;
 
 namespace SimuladorFisico
 {
+    /// <summary>
+    /// Gestion grafica de clase FCentri
+    /// </summary>
     public partial class Centrifuga : Form
     {
         private const int BALLSIZE = 10;
@@ -25,20 +28,31 @@ namespace SimuladorFisico
         PointF cp;
         double secs = 0;
         Timer t = new Timer();
+        /// <summary>
+        /// Crea instancia del formulario para fuerza centrifuga
+        /// </summary>
         public Centrifuga()
         {
             InitializeComponent();
             t.Interval = 100;
             t.Tick += T_Tick;
         }
-
+        /// <summary>
+        /// Ajusta la posicion del proyectil cada milisegundo
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void T_Tick(object sender, EventArgs e)
         {
             secs += 0.1;           
             cp = c.Posicion(secs);
             this.Invalidate();
         }
-
+        /// <summary>
+        /// Dibuja todos los elementos dinamicos del formulario, cuerda, proyectil, etc.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Centrifuga_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
@@ -66,16 +80,15 @@ namespace SimuladorFisico
 
             }
         }
-
+        /// <summary>
+        /// Evento de cierre de aplicacion que muestra el formulario menu
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Centrifuga_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.Owner.Show();
             t.Stop();
-        }
-
-        private void Centrifuga_Load(object sender, EventArgs e)
-        {
-
         }
         /// <summary>
         /// Dibuja una esfera en un punto determinado
@@ -118,7 +131,11 @@ namespace SimuladorFisico
             };
             gr.DrawLines(pen, points);
         }
-       
+        /// <summary>
+        /// Evento que inicia la animacion
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void c_Lstart_Click(object sender, EventArgs e)
         {
             error.Clear();
@@ -187,7 +204,11 @@ namespace SimuladorFisico
                 
             return ret;
         }
-
+        /// <summary>
+        /// Cuando se preciona el label detener se detiene la animacion
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void c_LStop_Click(object sender, EventArgs e)
         {
             t.Stop();                        
@@ -208,17 +229,17 @@ namespace SimuladorFisico
         /// <summary>
         /// Redondea el valor pasado como parametro a 2 decimales
         /// </summary>
-        /// <param name="val"></param>
+        /// <param name="val">Numero a convertir</param>
         /// <returns></returns>
         private double inRound(double val)
         {
             return Math.Round(val, 2);
         }
         /// <summary>
-        /// Distancia entre 2 puntos
+        /// Encuentra el punto medio entre 2 puntos
         /// </summary>
-        /// <param name="p1"></param>
-        /// <param name="p2"></param>
+        /// <param name="p1">Primer punto</param>
+        /// <param name="p2">Segundo punto</param>
         /// <returns></returns>
         private PointF PM(PointF p1, PointF p2)
         {

@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="SimuladorFisico.Centrifuga">
+    <Position X="7.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAACAAAKEAIBAIAAmAKkAGIIAAUCuEEIwQACCAoCQ=</HashCode>
+      <FileName>Centrifuga.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimuladorFisico.Coloumb">
+    <Position X="2.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AglAAAAAADACABAAAACACAACAAIgAAAAAAEgAwCgACA=</HashCode>
+      <FileName>Coloumb.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimuladorFisico.FCentri">
+    <Position X="10.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAABAAAAAAAAAAACAAAAAAAAEDBgAlYBQAAAAAA=</HashCode>
+      <FileName>FCentri.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Centrifuga" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SimuladorFisico.MainMenu">
+    <Position X="3.25" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAAIAABCCAAEAAAAACAAAgCAAB4AAAAAHAAAIBACAA=</HashCode>
+      <FileName>MainMenu.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Parabolic" />
+      <Property Name="Centrifuga" />
+      <Property Name="Pendulo" />
+      <Property Name="PenduloDoble" />
+      <Property Name="Coloumb" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SimuladorFisico.MovPara">
+    <Position X="9.5" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAQADAACAACgAAAIAAAAAgAAAABAAAIAAAAAGAAAAA=</HashCode>
+      <FileName>MovPara.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Parabolic" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="SimuladorFisico.Parabolic">
+    <Position X="6" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>cFAEAEDEQKMJIBA4AACAgAEWAAgBBIIEUYwIAYIIgAY=</HashCode>
+      <FileName>Parabolic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimuladorFisico.Pendulo">
+    <Position X="4.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>MAACBAASADFABZgIIAqAAAQCAgAIAQAAAFBARAiAACA=</HashCode>
+      <FileName>Pendulo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimuladorFisico.PenduloDoble">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAAAAADhABJACgA6QAAQCQgA4AwYIIGAQAQCIICA=</HashCode>
+      <FileName>PenduloDoble.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SimuladorFisico.Program">
+    <Position X="0.5" Y="1" Width="1.5" />
+    <AssociationLine Name="adsa" Type="SimuladorFisico.MainMenu">
+      <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
+        <Position X="0.204" Y="0.06" Height="0.182" Width="0.75" />
+      </MemberNameLabel>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="adsa" />
+    </ShowAsAssociation>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -12,6 +12,9 @@ using System.Windows.Forms;
 
 namespace SimuladorFisico
 {
+    /// <summary>
+    /// Gestion grafica de clase MovPara - calculos parabolicos
+    /// </summary>
     public partial class Parabolic : Form
     {
         const int SCALE = 10;
@@ -25,6 +28,9 @@ namespace SimuladorFisico
         private float CurrentAngle = 0;        
         private float TotalAngle = 0;
         private bool running=false;
+        /// <summary>
+        /// Crea instancia de la clase
+        /// </summary>
         public Parabolic()
         {
             InitializeComponent();
@@ -128,8 +134,8 @@ namespace SimuladorFisico
         /// <summary>
         /// Escala la imagen con relacion a las dimensiones del formulario y la escala real en metros
         /// </summary>
-        /// <param name="xy"></param>
-        /// <returns></returns>
+        /// <param name="xy">Valor Original</param>
+        /// <returns>Valor Reescalado</returns>
         private double Rescale(double xy)
         {
             if (escala <= 0)
@@ -140,8 +146,8 @@ namespace SimuladorFisico
         /// <summary>
         /// Modifica la escala si la animacion se sale del area visible del formulario
         /// </summary>
-        /// <param name="x"></param>
-        /// <param name="y"></param>
+        /// <param name="x">Posicion en x</param>
+        /// <param name="y">Posicion en y</param>
         /// <returns></returns>
         private bool fixScale(int x, int y)
         {
@@ -159,7 +165,7 @@ namespace SimuladorFisico
         /// <summary>
         /// Ajusta el origen del plano cartesiano de la esquina superior izquierda a la parte inferior izquierda
         /// </summary>
-        /// <param name="y"></param>
+        /// <param name="y">Valor en y de ajuste</param>
         /// <returns></returns>
         private double CCY(double y)
         {
@@ -247,7 +253,11 @@ namespace SimuladorFisico
             }
             return m;
         }
-
+        /// <summary>
+        /// Detiene la animacion y reposiciona el proyectil
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void c_LStop_Click(object sender, EventArgs e)
         {
             secs = 0;
@@ -261,7 +271,11 @@ namespace SimuladorFisico
             running = false;
             
         }
-
+        /// <summary>
+        /// Dibuja el trayecto cuando existe uno
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
             
@@ -270,12 +284,20 @@ namespace SimuladorFisico
                 DrawPath(e.Graphics);
             }            
         }
-
+        /// <summary>
+        /// Ajusta la velocidad con control track
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void c_Track_Scroll(object sender, EventArgs e)
         {
             c_TBVel.Text = c_Track.Value.ToString();
         }
-
+        /// <summary>
+        /// Configuracion inicial del formulario
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Form1_Load(object sender, EventArgs e)
         {
             Dictionary<string, double> environment = new Dictionary<string, double>();
@@ -304,7 +326,12 @@ namespace SimuladorFisico
             c_PBArrow.Image = OriginalBitmap;
 
         }
-        
+        /// <summary>
+        /// Rota una imagen un determinado angulo
+        /// </summary>
+        /// <param name="bm">Imagen a rotar</param>
+        /// <param name="angle">Angulo</param>
+        /// <returns></returns>
         private Bitmap RotateBitmap(Bitmap bm, float angle)
         {
             Bitmap result = new Bitmap(bm.Width, bm.Height);
@@ -324,6 +351,11 @@ namespace SimuladorFisico
 
         private float StartAngle;
         private bool DragInProgress = false;
+        /// <summary>
+        /// Captura evento cuando se clica la flecha
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void c_PBArrow_MouseDown(object sender, MouseEventArgs e)
         {
             if (OriginalBitmap == null) return;
@@ -332,7 +364,11 @@ namespace SimuladorFisico
             float dy = e.Y - ImageCenter.Y;
             StartAngle = (float)Math.Atan2(dy, dx);
         }
-
+        /// <summary>
+        /// Captura evento cuando se mueve el mouse y se esta clickando para mover flecha
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void c_PBArrow_MouseMove(object sender, MouseEventArgs e)
         {
             if (!DragInProgress) return;
@@ -365,12 +401,20 @@ namespace SimuladorFisico
             c_PBArrow.Image = RotatedBitmap;
             c_PBArrow.Refresh();
         }
-
+        /// <summary>
+        /// Convierte radianes a grados
+        /// </summary>
+        /// <param name="rad"></param>
+        /// <returns></returns>
         private float radToAng(float rad)
         {
             return rad * 180 / (float)Math.PI;
         }
-
+        /// <summary>
+        /// Captura evento cuando se deja de clickar la flecha
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void c_PBArrow_MouseUp(object sender, MouseEventArgs e)
         {
             DragInProgress = false;
@@ -378,7 +422,11 @@ namespace SimuladorFisico
             // Save the new total angle of rotation.
             TotalAngle = CurrentAngle;
         }
-
+        /// <summary>
+        /// Evento de cerrado
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Parabolic_FormClosed(object sender, FormClosedEventArgs e)
         {
             this.Owner.Show();

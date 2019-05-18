@@ -7,9 +7,22 @@ using System.Drawing;
 
 namespace SimuladorFisico
 {
+    /// <summary>
+    /// Realiza los calculos matematicos para calcular posicion de proyectil en N segundos para el MCU
+    /// </summary>
     class FCentri
     {
         double r, m, v, p, a;
+        /// <summary>
+        /// Crea instancia del objeto que hace los calculos del movimiento circular uniforme para calcular fuerza centrifuga,
+        /// Los dos primero parametros son obligatorios
+        /// El tercero debe elejirse almenos uno de los parametros opcionales
+        /// </summary>
+        /// <param name="masa">Masa del proyectil</param>
+        /// <param name="radio">Radio entre el centro del movimiento y el proyectil</param>
+        /// <param name="periodo">Segundos que tarda en dar una vuelta completa</param>
+        /// <param name="velocidad">Velocidad tangencial</param>
+        /// <param name="aceleracion">Constante de Aceleracion</param>
         public FCentri(double masa, double radio, double periodo = 0, double velocidad = 0, double aceleracion = 0)
         {
             m = masa;
@@ -93,42 +106,16 @@ namespace SimuladorFisico
         /// <summary>
         /// Devuelve la posicion del objeto en un determinado tiempo
         /// </summary>
-        /// <param name="segundos"></param>
-        /// <param name="posicioninicial"></param>
+        /// <param name="segundos">Segundos totales transcurridos</param>
+        /// <param name="posicioninicial">Posicion inicial</param>
         /// <returns></returns>
         public PointF Posicion(double segundos)
         {
             return new PointF((float)(r * Math.Cos(VelocidadAngular * segundos)), (float)(r * Math.Sin(VelocidadAngular * segundos)));
         }
-
         /// <summary>
-        /// Posicion en X con respecto al plano cartesiano
+        /// Radio
         /// </summary>
-        /// <param name="grados"></param>
-        /// <returns></returns>
-        public float X(double grados, float xi = 0)
-        {
-            return xi + (float)(r * Math.Cos(GradToRad(grados)));
-        }
-        /// <summary>
-        /// Posicion en Y con respecto al plano cartesiano
-        /// </summary>
-        /// <param name="grados"></param>
-        /// <returns></returns>
-        public float Y(double grados, float yi = 0)
-        {
-            return yi + (float)(r * Math.Sin(GradToRad(grados)));
-        }
-        /// <summary>
-        /// Determina el angulo a los n segundos
-        /// </summary>
-        /// <param name="nsegundos"></param>
-        /// <param name="anguloinicial"></param>
-        /// <returns></returns>
-        public double AnguloEnNSegundos(double nsegundos, double anguloinicial)
-        {
-            return anguloinicial + VelocidadAngular * nsegundos;
-        }
         public double Radio
         {
             get
@@ -144,6 +131,18 @@ namespace SimuladorFisico
         public static double GradToRad(double grados)
         {
             return grados * (Math.PI / 180);
+        }
+
+        public Centrifuga Centrifuga
+        {
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+
+            set
+            {
+            }
         }
     }
 }
